@@ -8,8 +8,8 @@ import Error from "./screens/Error";
 import FAQs from "./screens/faq";
 import View from "./screens/view";
 import Home from "./screens/home";
-import Add from "./compound/note";
-import Addlist from "./compound/notelist";
+import Note from "./compound/note";
+import NoteList from "./compound/notelist";
 import Test from "./compound/ex1";
 
 function App() {
@@ -23,10 +23,10 @@ function App() {
           <Route path="/login"  index element={<Login/>} />
           <Route path="/faqs"   element={<FAQs/>} /> 
           <Route path="/home"   element={<Home/>} /> 
-          <Route path="/note"   element={<Add/>} /> 
-          <Route path="/view"   element={<View/>} /> 
-          <Route path="/notelist"   element={<Addlist/>} /> 
-          <Route path="/test"   element={<Test/>} /> 
+          <Route path="/note/:id"   element={<Note/>} /> 
+          {/* <Route path="/note/:id"   element={<View/>} />  */}
+          <Route path="/notelist"   element={<NoteList/>} /> 
+          {/* <Route path="/test"   element={<Test/>} />  */}
           <Route path="*" element={<Error/>} />
 
           

@@ -5,7 +5,7 @@ import Navbar from './MenuAppBar';
 import Swal from 'sweetalert2';
 import Footer from './footer';
 
-function Add() {
+function Note() {
 	const {state}=useLocation();
   const [title, setTitle] = useState(state?.title?state.title:'');
 	const [description, setDescription] = useState(state?.description?state.description:'');
@@ -29,6 +29,13 @@ function Add() {
 		} else if (description === '') {
 			Swal.fire('The Internet?', 'Enter your Description', 'question');
 		} else {
+			let notelistdata=localStorage.getItem("notelist")
+			if(notelistdata?.length>0){
+				localStorage.setItem("notelist",JSON.stringify([notelistdata,{ id: notelistdata.length + 1, title: title, description: description }]))
+			}
+			else{
+			localStorage.setItem("notelist",JSON.stringify([{ id: 0, title: title, description: description }]))
+		}
      const tempre = [{ id: listed.length + 1, title: title, description: description }];
 		
 			Swal.fire('Good job!', 'Your Entry is Success!', 'success');
@@ -39,19 +46,15 @@ function Add() {
 		setTitle('');
 		setDescription('');
 	};
-	const add = (e) => {
-		addclick();
-		
-	};
-  
-	const view = (props) => {
-		addclick(props);
-		navigate('/home', { state: listed });
-	};
-	const edit = (props) => {
-		addclick(props);
-		navigate('/home', { state: listed });
-	};
+	  
+	// const view = (props) => {
+	// 	addclick(props);
+	// 	navigate('/home', { state: listed });
+	// };
+	// const edit = (props) => {
+	// 	addclick(props);
+	// 	navigate('/home', { state: listed });
+	// };
 
 	return (
 		<div>
@@ -86,7 +89,7 @@ function Add() {
 					></textarea>
 					<br />
 					<br />
-					<button className="exbtn" onClick={() => add()}>
+					<button className="exbtn" onClick={() => addclick()}>
 						Add
 					</button>
 				</div>
@@ -96,4 +99,4 @@ function Add() {
 	);
 }
 
-export default Add;
+export default Note;

@@ -105,3 +105,6 @@ dist
 
 # NPM Lock file
 package-lock.json
+
+# Build Dir
+/build

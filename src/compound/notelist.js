@@ -6,13 +6,17 @@ import ModeEdit from '@mui/icons-material/ModeEdit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useState } from 'react';
 import { Table, TableContainer, TableHead, TableRow, TableCell, TableBody, Paper } from '@mui/material';
+import { LastPageRounded } from '@mui/icons-material';
 // import Add from "./compound/add";
 
-function Addlist() {
+function NoteList() {
 	const navigate = useNavigate();
 	const { state } = useLocation();
-	const [task1, setTask1] = useState(state);
-  console.log(state);
+	const notelistdata=JSON.parse(localStorage.getItem("notelist"))||[];
+	console.log(notelistdata,'$$$$$');
+	const [task1, setTask1] = useState(notelistdata?.length>0?notelistdata:[]);
+    console.log(notelistdata,'*****');
+	
 
 	// const [list] =useState([state])
 
@@ -24,12 +28,12 @@ function Addlist() {
 	};
 
 	const View = (item) => {
-		navigate('/view', { state: item });
+		navigate('/note/viewmode', { state: item });
 	};
 	const handleEdit = (item) => {
 		// setName(allData[i])
 		// setEditIndex(i)
-		navigate('/note', { state: item });
+		navigate('/note/editmode', { state: item });
 	};
 
 	return (
@@ -37,13 +41,13 @@ function Addlist() {
 			<div className="plus">
 				<AddCircleIcon
 					onClick={() => {
-						navigate('/note');
+						navigate('/note/addmode');
 					}}
 				></AddCircleIcon>
 				<span style={{ color: '#918f8d', display: 'block' }}>Add Your Note</span>
 			</div>
-
-			{task1?.length > 0 &&
+{console.log(task1)}
+			{task1?.length > 0 ?
 				task1.map((item, index) => {
 					return (
 						<div className="listed">
@@ -94,9 +98,9 @@ function Addlist() {
 							</TableContainer>
 						</div>
 					);
-				})}
+				}):<p>No Data, Click + Button to add data</p>}
 		</div>
 	);
 }
 
-export default Addlist;
+export default NoteList;
